@@ -1,2 +1,27 @@
 <h1>Books#index</h1>
 <p>Find me in app/views/books/index.html.erb</p>
+
+<%#  追記して！  , var: @var  %>
+<%= render 'user_info'%>
+<%#  追記して！  , book: @book  もちろんcontrollerで定義してね %>
+<%= render 'new_book'%>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+      <th colspan="3"></th>
+      <%# 今回は要るか？？？ %>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td>ユーザーの画像</td><%# リンク %>
+      <td>本のTitle</td><%# リンク %>
+      <td>本のBody </td>
+    </tr>
+
+  </tbody>
