@@ -1,7 +1,7 @@
 <h2>Log in！</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-<%# email -> nameに変更 %>
+  <%# email -> nameに変更 %>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.email_field :name, autofocus: true, autocomplete: "name" %>
