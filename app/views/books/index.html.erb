@@ -2,10 +2,10 @@
 <p>Find me in app/views/books/index.html.erb</p>
 
 <%#  追記して！  , var: @var  %>
-<%= render 'user_info'%>
+<%= render 'users/user_info'%>
 <%#  追記して！  , book: @book  もちろんcontrollerで定義してね %>
-<%= render 'new_book'%>
-
+<%= render 'books/new_book'%>
+<h2>Books</h2>
 <table>
   <thead>
     <tr>
@@ -19,8 +19,10 @@
   <tbody>
 
     <tr>
-      <td>ユーザーの画像</td><%# リンク %>
-      <td>本のTitle</td><%# リンク %>
+      <td>ユーザーの画像</td>
+      <%# リンク %>
+      <td>本のTitle</td>
+      <%# リンク %>
       <td>本のBody </td>
     </tr>
 
