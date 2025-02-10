@@ -19,9 +19,9 @@
           <%= link_to "Home", "/" %>
         </li>
 
-<%# userspath! %>
+        <%# userspath! %>
 
-<%# bookspath! %>
+        <%# bookspath! %>
 
         <li>
           <%= link_to "Log out", destroy_user_session_path, method: :delete %>
@@ -45,5 +45,8 @@
       <% end %>
     </header>
     <%= yield %>
+    <footer>
+      CopyRight Infratop.inc
+    </footer>
   </body>
 </html>
