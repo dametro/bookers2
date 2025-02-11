@@ -4,7 +4,7 @@
   <%= image_tag user.get_image, size: "200x200"%>
   <table>
     <tbody>
-      <tr></tr><%# なにこれ？？ %>
+      <%#<tr></tr> なにこれ？？ %>
       <tr>
         <th>name</th>
         <th><%= user.name %></th>
@@ -16,6 +16,6 @@
     </tbody>
   </table>
   <div>
-    <%= button_to user_path(user) %>
+    <%= button_to "歯車アイコン", user_path(user) %>
   </div>
 </div>
