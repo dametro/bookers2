@@ -38,7 +38,11 @@ class BooksController < ApplicationController
   def destroy
     #バリデーションは未だ
     @book = Book.find(params[:id])
-    @book = destroy
+    if @book.destroy
+      puts "@book 破壊！ destroyed!"
+    else
+      puts "@book 破壊に失敗！！"
+    end
     redirect_to books_path
   end
 
