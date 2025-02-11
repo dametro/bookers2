@@ -9,4 +9,10 @@ class User < ApplicationRecord
   # :recoverable（パスワードをリセット）
   # :rememberable（ログイン情報を保存）
   # :validatable（email のフォーマットなどのバリデーション
+   
+  has_one_attached :image
+  #デフォルト画像の指定は-- にて
+  
+  has_many :books, dependent: :destroy
+  
 end
