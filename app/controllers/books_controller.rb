@@ -12,11 +12,19 @@ class BooksController < ApplicationController
   end
 
   def edit
-    user = Book.find(params[:id]).user
-    if current_user.id == user.id
+    @book= Book.find(params[:id])
+    if current_user.id == @book.user.id
+      puts "編集可:あなたのuser id と 作成者のuser id が 一致しました"
     else
+      puts "編集不可:あなたのuser id と 作成者のuser id は 一致しませんでした！"
       redirect_to books_path
     end
+
+  def update
+    @book = Book.find(params[:id])
+    @book.update(book_params)
+    redirect_to book_path(@book.id)  
+  end
 
   end
 
@@ -28,6 +36,7 @@ class BooksController < ApplicationController
   end
 
   def destroy
+    #バリデーションは未だ
     @book = Book.find(params[:id])
     @book = destroy
     redirect_to books_path
