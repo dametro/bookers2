@@ -1,8 +1,21 @@
 <div>
   <h2>User info</h2>
   <p>あなたのプロフィール</p>
-  <p>(画像)</p>
-  <p>(name)</p>
-  <p>(Introduction)</p>
-  <p>編集 歯車マーク</p>
+  <%= image_tag user.get_image, size: "200x200"%>
+  <table>
+    <tbody>
+      <tr></tr><%# なにこれ？？ %>
+      <tr>
+        <th>name</th>
+        <th><%= user.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th><%= user.introduction %></th>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <%= button_to user_path(user) %>
+  </div>
 </div>

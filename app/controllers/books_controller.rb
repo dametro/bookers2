@@ -3,7 +3,7 @@ class BooksController < ApplicationController
     @books = Book.all
     @new_book = Book.new
     #左上プロフィール用
-    @user = current_user 
+    @your_user = current_user 
   end
 
   def show
@@ -12,7 +12,7 @@ class BooksController < ApplicationController
     #詳細表示用
     @book = Book.find(params[:id])
     #左上プロフィール用  
-    @user = current_user 
+    @your_user = current_user 
   end
 
   def edit
