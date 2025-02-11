@@ -1,7 +1,10 @@
 <div>
   <h2>New book</h2>
   <p>本を投稿しましょう</p>
-  <p>Title [    ]</p>
-  <p>Opinion [    ]</p>
-  <p>投稿 Createボタン</p>
+  <%= form_with model: book do |f| %>
+    <span>Title</span><%= f.text_field :title %><br>
+    <span>Opinion</span><%= f.text_field :body %><br>
+    <%= f.submit 'Create' %>
+  <% end %>
+  
 </div>
