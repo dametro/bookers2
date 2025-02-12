@@ -21,6 +21,10 @@ class User < ApplicationRecord
     image
   end
   
-  has_many :books, dependent: :destroy
+  has_many :books, dependent: :destroy 
+  #ご利益 books method 
+  def books  
+    Book.where(user_id: self.id)
+  end
 
 end

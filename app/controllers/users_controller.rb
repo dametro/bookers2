@@ -13,8 +13,9 @@ class UsersController < ApplicationController
     #左上、あなたのみではなく、任意の注目ユーザー
     @user = User.find(params[:id])
     #その人の投稿したbook
-    @books = Book.where(user_id: @user.id)
-
+    # @books = Book.where(user_id: @user.id)#教材
+    @books = @user.books  #でよい
+    
     #投稿フォーム:render new_book用
     @new_book = Book.new
 
