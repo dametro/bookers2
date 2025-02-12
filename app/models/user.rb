@@ -21,10 +21,14 @@ class User < ApplicationRecord
     image
   end
   
-  has_many :books, dependent: :destroy 
-  #ご利益 books method 
-  def books  
-    Book.where(user_id: self.id)
-  end
+  has_many :books, dependent: :destroy
+  
+  #  has_many :books_of_user, class_name: "Book", foreign_key: "user_id", dependent: :destroy
+  #  できればこうしたいが、たぶん要件なので......
+  
+  #ご利益 次のメソッドが利用可能
+  # def books
+  #   Book.where(user_id: self.id)
+  # end
 
 end
