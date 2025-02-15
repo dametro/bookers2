@@ -1,5 +1,7 @@
 class BooksController < ApplicationController
   def index
+    @book = Book.new #create成功時のリダイレクトでviewにNilエラーが出ると嫌だから
+
     @books = Book.all
     @new_book = Book.new
     #左上プロフィール用
@@ -30,10 +32,14 @@ class BooksController < ApplicationController
 
     if @book.update(book_params)
       puts "成功！book update."
+      flash[:notice] = "You have updated book successfully."
+      redirect_to book_path(@book.id)  
     else 
       puts "失敗...... 。book updateできず."
+      render :edit
+      #edit表示に必要な情報変数は@bookのみ、renderでいい
     end
-    redirect_to book_path(@book.id)  
+    
   end
 
   end
@@ -41,13 +47,20 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
+    #いずれにしても/books(index)に飛ばす
     if @book.save
       puts "成功！book create."
+      redirect_to books_path
     else 
       puts "失敗...... 。book createできず."
+      # @book.error渡したいからrender
+      # books#indexに必要な情報はここで用意してあげる
+      @books = Book.all
+      @new_book = Book.new
+      @your_user = current_user 
+      render :index
     end
-    #いずれにしても/booksに飛ばす
-    redirect_to books_path
+
   end
 
   def destroy
