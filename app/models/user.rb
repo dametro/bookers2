@@ -30,7 +30,9 @@ class User < ApplicationRecord
   #   Book.where(user_id: self.id)
   # end
    
-  validates :title, presence: true
-  validates :body, presence: true
+  validates :name, presence: true
+  #nameは必須
+  
+  #なお、sign_up時はデフォルトで諸々必須っぽい
 
 end
