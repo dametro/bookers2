@@ -47,11 +47,11 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
-    #いずれにしても/books(index)に飛ばす
+    #いずれにしても/books(index)に飛ばす...違う！books/idか
     if @book.save
       puts "成功！book create."
       flash[:notice] = "You have created book successfully."
-      redirect_to books_path
+      redirect_to book_path(@book.id)
     else 
       puts "失敗...... 。book createできず."
       # @book.error渡したいからrender

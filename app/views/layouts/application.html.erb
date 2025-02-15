@@ -13,7 +13,7 @@
   <body>
 
     <header>
-      <%= link_to "Bookers", "/" %>
+      <%= link_to "Bookers", root_path %>
       <ul>
         <% if user_signed_in? %>
 
@@ -33,7 +33,7 @@
         <% else %>
 
           <li>
-            <%= link_to "Home", "/" %>
+            <%= link_to "Home", root_path %>
           </li>
 
           <li>
