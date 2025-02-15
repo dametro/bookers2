@@ -30,8 +30,16 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_path(@user.id)  
+    
+    if @user.update(user_params)
+      puts "成功！userプロフィール update."
+      flash[:notice] = "You have updated user successfully."
+      redirect_to user_path(@user.id)
+    else 
+      puts "失敗...... 。userプロフィール updateできず."
+      render :edit
+    end
+      
   end
 
   # ユーザーデータのストロングパラメータ
@@ -41,11 +49,13 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :introduction, :image)
   end
+
   def is_matching_login_user
     #他人のプロフィールを編集させないよう、自分の編集画面に飛ばす
     user = User.find(params[:id])
     unless user.id == current_user.id
-      redirect_to user_path(current_user)#.idじゃなくていいんだっけ
+      redirect_to user_path(current_user) #.idじゃなくていいんだっけ
     end
   end
+
 end

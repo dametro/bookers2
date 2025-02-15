@@ -1,9 +1,18 @@
 <h1>User Info</h1>
 <p>ユーザープロフィールの編集</p>
 
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <div>
- You Are:  
- <%= @user.name %><br>
+  You Are:  
+  <%= @user.name %><br>
 </div>
 <%= form_with model: @user do |f| %>
 

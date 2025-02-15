@@ -27,6 +27,12 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     @book.update(book_params)
+
+    if @book.update(book_params)
+      puts "成功！book update."
+    else 
+      puts "失敗...... 。book updateできず."
+    end
     redirect_to book_path(@book.id)  
   end
 
@@ -40,6 +46,7 @@ class BooksController < ApplicationController
     else 
       puts "失敗...... 。book createできず."
     end
+    #いずれにしても/booksに飛ばす
     redirect_to books_path
   end
 

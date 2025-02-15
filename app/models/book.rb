@@ -3,6 +3,6 @@ class Book < ApplicationRecord
 
   validates :title, presence: true
   validates :body, presence: true
-  #nameは必須
+  #ともに必須
 
 end
