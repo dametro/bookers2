@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  #他人のプロフィールを編集させない！
+  before_action :is_matching_login_user, only: [:edit, :update]
+
   def index
     #一覧表示
     @users = User.all
@@ -22,10 +25,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    # @user = current_user
     @user = User.find(params[:id])
-    #ここにも分岐必要
   end
+
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
@@ -38,5 +40,12 @@ class UsersController < ApplicationController
   #許容(not必須)カラム名
   def user_params
     params.require(:user).permit(:name, :introduction, :image)
+  end
+  def is_matching_login_user
+    #他人のプロフィールを編集させないよう、自分の編集画面に飛ばす
+    user = User.find(params[:id])
+    unless user.id == current_user.id
+      redirect_to user_path(current_user)#.idじゃなくていいんだっけ
+    end
   end
 end
