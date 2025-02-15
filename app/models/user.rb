@@ -30,10 +30,9 @@ class User < ApplicationRecord
   #   Book.where(user_id: self.id)
   # end
    
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true, length: { in: 2..20 } 
   #nameは必須 かつ固有
-  
-  validates :name, length: { in: 2..20 } 
+
   validates :introduction, length: { maximum: 50 }
   
   #なお、sign_up時はデフォルトで諸々必須っぽい
