@@ -1,2 +1,22 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<h1>User Info</h1>
+<p>ユーザープロフィールの編集</p>
+
+<div>
+ You Are:  
+ <%= @user.name %><br>
+</div>
+<%= form_with model: @user do |f| %>
+
+  <label for="inputName">Name</label><br>
+  <%= f.text_field :name %><br>
+  <br>
+  <label for="inputImage">Image</label><br>
+  <%# ここ怪しい %>
+  <%= f.file_field :image, placeholder: "ファイルを選択せよ!", accept: "image/*" %><br>
+  <br>
+  <div>Introduction</div>
+  <%= f.text_area :introduction %><br>
+  <br>
+  <%= f.submit 'Update User' %>
+
+<% end %>
