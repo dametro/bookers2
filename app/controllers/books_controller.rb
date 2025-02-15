@@ -50,6 +50,7 @@ class BooksController < ApplicationController
     #いずれにしても/books(index)に飛ばす
     if @book.save
       puts "成功！book create."
+      flash[:notice] = "You have created book successfully."
       redirect_to books_path
     else 
       puts "失敗...... 。book createできず."
