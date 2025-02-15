@@ -4,5 +4,6 @@ class Book < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true
   #ともに必須
+  validates :title, length: { maximum: 200 }
 
 end
