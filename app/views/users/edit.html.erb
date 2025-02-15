@@ -11,8 +11,8 @@
   <%= f.text_field :name %><br>
   <br>
   <label for="inputImage">Image</label><br>
-  <%# ここ怪しい %>
-  <%= f.file_field :image, placeholder: "ファイルを選択せよ!", accept: "image/*" %><br>
+  <%# ここ怪しい placeholderは無効か？%>
+  <%= f.file_field :image, accept: "image/*" %><br>
   <br>
   <div>Introduction</div>
   <%= f.text_area :introduction %><br>

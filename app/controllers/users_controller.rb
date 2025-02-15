@@ -35,7 +35,8 @@ class UsersController < ApplicationController
   # ユーザーデータのストロングパラメータ
   private
 
+  #許容(not必須)カラム名
   def user_params
-    params.require(:user).permit(:name)
+    params.require(:user).permit(:name, :introduction, :image)
   end
 end
