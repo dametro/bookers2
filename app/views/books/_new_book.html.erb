@@ -2,9 +2,17 @@
   <h2>New book</h2>
   <p>本を投稿しましょう</p>
   <%= form_with model: book do |f| %>
-    <span>Title</span><%= f.text_field :title %><br>
-    <span>Opinion</span><%= f.text_field :body %><br>
-    <%= f.submit 'Create' %>
+    <div class="form-group">
+      <span>Title</span><%= f.text_field :title %><br>
+    </div>
+
+    <div class="form-group">
+      <span>Opinion</span><%= f.text_field :body %><br>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit 'Create' %>
+    </div>
   <% end %>
-  
+
 </div>

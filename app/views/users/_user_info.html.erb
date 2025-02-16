@@ -2,7 +2,7 @@
   <h2>User info</h2>
   <p>あなた/誰か のプロフィール</p>
   <%= image_tag user.get_image, size: "100x100"%>
-  <table>
+  <table class="table">
     <tbody>
       <%#<tr></tr> なにこれ？？ %>
       <tr>
@@ -16,7 +16,7 @@
     </tbody>
   </table>
   <div>
-    <%= link_to edit_user_path(user) do %>
+    <%= link_to edit_user_path(user), class: "btn btn-block btn-secondary" do %>
       <i class="fa-solid fa-gear"></i>
     <% end %>
   </div>
