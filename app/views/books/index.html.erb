@@ -1,7 +1,6 @@
-<div>
-  <%= flash[:notice] %>
+
   <%# 成功時はここに来ないはずで、fllashは不要か。 %>
-</div>
+
 <% if @book.errors.any? %>
   <%= @book.errors.count %>件のエラーが発生しました
   <ul>
