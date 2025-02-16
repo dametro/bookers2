@@ -1,7 +1,7 @@
   <%# 成功時はここに来ないはずで、fllashは不要か。 %>
 
 <% if @book.errors.any? %>
-  <%= @book.errors.count %>件のエラーが発生しました
+  <%= @book.errors.count %> errors prohibited this obj from being saved:
   <ul>
     <% @book.errors.full_messages.each do |message| %>
       <li><%= message %></li>
@@ -33,8 +33,8 @@
           <td>
             <%# リンクは(book.user.id)にしなくていい %>
             <%= link_to user_path(book.user) do %>
-              <%# userモデルで作ったメソッド get_image %>
-              <%= image_tag book.user.get_image, size: "100x100"%>
+              <%# userモデルで作ったメソッド get_profile_image %>
+              <%= image_tag book.user.get_profile_image, size: "100x100"%>
             <% end %>
           </td>
           <td><%= link_to book.title, book_path(book), method: :get %></td>

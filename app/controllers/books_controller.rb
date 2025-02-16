@@ -14,7 +14,7 @@ class BooksController < ApplicationController
     #詳細表示用
     @book = Book.find(params[:id])
     #左上プロフィール用  
-    @your_user = current_user 
+    @posted_user = User.find(@book.user_id)
   end
 
   def edit

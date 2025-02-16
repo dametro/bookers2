@@ -10,16 +10,15 @@ class User < ApplicationRecord
   # :rememberable（ログイン情報を保存）
   # :validatable（email のフォーマットなどのバリデーション
    
-  has_one_attached :image
-  #デフォルト画像の指定はget_image にて
-  #まさかprofile_imageじゃないと駄目？？？
+  has_one_attached :profile_image
+  #デフォルト画像の指定はget_profile_image にて
   
-  def get_image
-    unless image.attached?
+  def get_profile_image
+    unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
-      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    image
+    profile_image
   end
   
   has_many :books, dependent: :destroy
