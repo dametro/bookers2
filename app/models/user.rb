@@ -12,6 +12,7 @@ class User < ApplicationRecord
    
   has_one_attached :image
   #デフォルト画像の指定はget_image にて
+  #まさかprofile_imageじゃないと駄目？？？
   
   def get_image
     unless image.attached?
