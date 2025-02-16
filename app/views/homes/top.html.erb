@@ -1,3 +1,17 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
-てすと。
+<div class="col">
+  <h1>
+    welcome to Bookers !!
+  </h1>
+
+  <p>In <i class="fa-solid fa-book"></i><strong>Bookers</strong>,
+  </p>
+  <p>
+    you can share and exchange your opinions , inpressions , and emotions
+  </p>
+  <p>
+    about various books!
+    <div class="mx-4">
+      <%= link_to "Log in", new_user_session_path, method: :get, class: "btn btn-info btn-block" %>
+      <%= link_to "Sign up", new_user_registration_path, method: :get, class: "btn btn-success btn-block" %>
+    </div>
+  </p>
