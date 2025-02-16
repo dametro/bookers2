@@ -16,6 +16,8 @@
     </tbody>
   </table>
   <div>
-    <%= link_to "歯車アイコン", edit_user_path(user) %>
+    <%= link_to edit_user_path(user) do %>
+      <i class="fa-solid fa-gear"></i>
+    <% end %>
   </div>
 </div>
