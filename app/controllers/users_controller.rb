@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
   #許容(not必須)カラム名
   def user_params
-    params.require(:user).permit(:name, :introduction, :image)
+    params.require(:user).permit(:name, :introduction, :profile_image)
   end
 
   def is_matching_login_user
