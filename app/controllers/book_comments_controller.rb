@@ -44,7 +44,7 @@ class BookCommentsController < ApplicationController
     # 直前のページにリダイレクト？いままで通りshow限定でもいい
     # books#show  のみを想定
     # redirect_to book_path(book)
-    redirect_to request.referer
+    redirect_to book_path(book_comment.book)
   end
 
   private

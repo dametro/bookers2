@@ -22,7 +22,7 @@ class BooksController < ApplicationController
     @book_comments = @book.book_comments
     #book_comment 投稿用
     @book_comment = BookComment.new(book_id: @book.id)
-    puts "新しい@book_commentのデータ... #{@book_comment}, user: #{current_user.id}, book: #{@book_comment.book_id} です  "
+    puts "新しい@book_commentのデータ... #{@book_comment}, user: #{current_user.id}, book: #{@book_comment.book_id} にて  "
   end
 
   def edit

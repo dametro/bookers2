@@ -42,12 +42,12 @@
             <td>
 
               <% if book.favorited_by?(current_user) %>
-                <%= link_to book_favorite_path(book), method: :delete do %>
-                  (ハートアイコン): <%= book.favorites.count %> あなたはいいね済 取り消す？
+                <%= link_to book_favorite_path(book), method: :delete, class: "text-danger" do %>
+                  <i class="fa-solid fa-heart"></i> <%= book.favorites.count %>
                 <% end %>
               <% else %>
-                <%= link_to book_favorite_path(book), method: :post do %>
-                  (ハートアイコン): <%= book.favorites.count %> あなたは未いいね 加える？
+                <%= link_to book_favorite_path(book), method: :post, class: "text-primary" do %>
+                  <i class="fa-solid fa-heart"></i> <%= book.favorites.count %>
                 <% end %>
               <% end %>
 
