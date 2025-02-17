@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # get 'books/edit'
   resources :books, only: [:index, :create, :show, :edit, :update, :destroy] do
     resource :favorite, only: [:create, :destroy] #単数形
+    resources :book_comments, only: [:create, :destroy] #destも大事
   end
   root to: 'homes#top'
   get 'home/about' => 'homes#about'

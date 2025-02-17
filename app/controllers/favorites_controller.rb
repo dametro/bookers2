@@ -1,5 +1,7 @@
 class FavoritesController < ApplicationController
 
+
+  # favorite は単数、bookに固有だから :idとして取得せず(できず) urlの :book_idを利用する
   def create
     book = Book.find(params[:book_id])
     # favorite = current_user.favorites.new(book_id: book.id)
