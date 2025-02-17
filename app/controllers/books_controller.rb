@@ -6,6 +6,8 @@ class BooksController < ApplicationController
     @new_book = Book.new
     #左上プロフィール用
     @your_user = current_user 
+
+    #book_comments 全表示用 ..は要らない！
   end
 
   def show
@@ -15,6 +17,12 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     #左上プロフィール用  
     @posted_user = User.find(@book.user_id)
+
+    #book_comments 全表示用 modelにあるメソッド
+    @book_comments = @book.book_comments
+    #book_comment 投稿用
+    @book_comment = BookComment.new(book_id: @book.id)
+    puts "新しい@book_commentのデータ... #{@book_comment}, user: #{current_user.id}, book: #{@book_comment.book_id} です  "
   end
 
   def edit

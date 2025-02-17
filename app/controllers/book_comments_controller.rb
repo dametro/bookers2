@@ -9,20 +9,21 @@ class BookCommentsController < ApplicationController
     book_comment.book_id = book.id    
     book_comment.user_id = current_user.id 
 
-    puts "新しいbook_commentのデータ... #{book_comment}, id:#{book_comment.id}, user: #{book_comment.user_id}, book: #{book_comment.book_id} です  "
+    puts "新しいbook_commentのデータ... #{book_comment}, user: #{book_comment.user_id}, book: #{book_comment.book_id} です  "
     if book_comment.save
       puts "コメント成功しました"
     else
       puts "失敗‼!!! コメント 失敗しました......"
     end
-    # 直前のページにリダイレクト？いままで通りshow限定でもいい
+    # 直前のページにリダイレクト してはいけない。たぶん。
     # books#show  のみを想定
-    # redirect_to book_path(book)
-    redirect_to request.referer
+    redirect_to book_path(book)
+    # redirect_to request.referer
 
   end
 
   def destroy
+    puts "あああああああああああああああ"
     # urlは DELETE /books/:book_id/book_comments/:id なので、:idでコメントid取得できるはず
     book_comment = BookComment.find(params[:id])  
     puts "消したいbook_commentのデータ... #{book_comment} です "
@@ -39,7 +40,7 @@ class BookCommentsController < ApplicationController
     else
       puts "不許可！ あなたはコメント主ではありません、削除は許可しません！！"
     end
-    
+
     # 直前のページにリダイレクト？いままで通りshow限定でもいい
     # books#show  のみを想定
     # redirect_to book_path(book)
