@@ -23,7 +23,6 @@ class BookCommentsController < ApplicationController
   end
 
   def destroy
-    puts "あああああああああああああああ"
     # urlは DELETE /books/:book_id/book_comments/:id なので、:idでコメントid取得できるはず
     book_comment = BookComment.find(params[:id])  
     puts "消したいbook_commentのデータ... #{book_comment} です "

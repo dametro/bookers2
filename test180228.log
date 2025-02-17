@@ -1,0 +1,525 @@
+
+UsersController
+  GET #edit
+    ログインユーザーの場合
+      レスポンスが成功すること
+      @userが正しく設定されていること
+
+BookCommentモデルのテスト
+  バリデーションのテスト
+    commentカラム
+      空欄でないこと
+  アソシエーションのテスト
+    Bookモデルとの関係
+      N:1となっている
+    Userモデルとの関係
+      N:1となっている
+
+Bookモデルのテスト
+  バリデーションのテスト
+    titleカラム
+      空欄でないこと
+    bodyカラム
+      空欄でないこと
+      200文字以下であること: 200文字は〇
+      200文字以下であること: 201文字は×
+  アソシエーションのテスト
+    Userモデルとの関係
+      N:1となっている
+
+Favoriteモデルのテスト
+  バリデーションのテスト
+    ユーザーは一つの投稿に一つしかいいねできない
+  アソシエーションのテスト
+    Bookモデルとの関係
+      N:1となっている
+    Userモデルとの関係
+      N:1となっている
+
+Userモデルのテスト
+  バリデーションのテスト
+    nameカラム
+      空欄でないこと
+      2文字以上であること: 1文字は×
+      2文字以上であること: 2文字は〇
+      20文字以下であること: 20文字は〇
+      20文字以下であること: 21文字は×
+      一意性があること
+    introductionカラム
+      50文字以下であること: 50文字は〇
+      50文字以下であること: 51文字は×
+  アソシエーションのテスト
+    Bookモデルとの関係
+      1:Nとなっている
+
+[STEP1] ユーザログイン前のテスト
+  トップ画面のテスト
+    表示内容の確認
+      URLが正しい
+      Log inリンクが表示される: 青色のボタンの表示が「Log in」である
+      Log inリンクの内容が正しい
+      Sign upリンクが表示される: 緑色のボタンの表示が「Sign up」である
+      Sign upリンクの内容が正しい
+  アバウト画面のテスト
+    表示内容の確認
+      URLが正しい
+  ヘッダーのテスト: ログインしていない場合
+    表示内容の確認
+      Bookersリンクが表示される: 左上から1番目のリンクが「Bookers」である
+      Homeリンクが表示される: 左上から2番目のリンクが「Home」である
+      Aboutリンクが表示される: 左上から3番目のリンクが「About」である
+      Sign upリンクが表示される: 左上から4番目のリンクが「Sign up」である
+      Log inリンクが表示される: 左上から5番目のリンクが「Log in」である
+    リンクの内容を確認
+      Bookersを押すと、トップ画面に遷移する
+      Homeを押すと、トップ画面に遷移する
+      Aboutを押すと、アバウト画面に遷移する
+      Sign upを押すと、新規登録画面に遷移する
+      Log inを押すと、ログイン画面に遷移する
+  ユーザ新規登録のテスト
+    表示内容の確認
+      URLが正しい
+      「Sign up」と表示される
+      nameフォームが表示される
+      emailフォームが表示される
+      passwordフォームが表示される
+      password_confirmationフォームが表示される
+      Sign upボタンが表示される
+    新規登録成功のテスト
+      正しく新規登録される
+      新規登録後のリダイレクト先が、新規登録できたユーザの詳細画面になっている
+  ユーザログイン
+    表示内容の確認
+      URLが正しい
+      「Log in」と表示される
+      nameフォームが表示される
+      passwordフォームが表示される
+      Log inボタンが表示される
+      emailフォームは表示されない
+    ログイン成功のテスト
+      ログイン後のリダイレクト先が、ログインしたユーザの詳細画面になっている
+    ログイン失敗のテスト
+      ログインに失敗し、ログイン画面にリダイレクトされる
+  ヘッダーのテスト: ログインしている場合
+    ヘッダーの表示を確認
+      Bookersリンクが表示される: 左上から1番目のリンクが「Bookers」である
+      Homeリンクが表示される: 左上から2番目のリンクが「Home」である
+      Usersリンクが表示される: 左上から3番目のリンクが「Users」である
+      Booksリンクが表示される: 左上から4番目のリンクが「Books」である
+      Log outリンクが表示される: 左上から5番目のリンクが「Log out」である
+  ユーザログアウトのテスト
+    ログアウト機能のテスト
+      正しくログアウトできている: ログアウト後のリダイレクト先においてAbout画面へのリンクが存在する
+      ログアウト後のリダイレクト先が、トップになっている
+
+[STEP2] ユーザログイン後のテスト
+  ヘッダーのテスト: ログインしている場合
+    リンクの内容を確認: ※logoutは『ユーザログアウトのテスト』でテスト済みになります。
+      Homeを押すと、自分のユーザ詳細画面に遷移する
+      Usersを押すと、ユーザ一覧画面に遷移する
+      Booksを押すと、投稿一覧画面に遷移する
+  投稿一覧画面のテスト
+    表示内容の確認
+      URLが正しい
+      自分と他人の画像のリンク先が正しい
+      自分の投稿と他人の投稿のタイトルのリンク先がそれぞれ正しい
+      自分の投稿と他人の投稿のオピニオンが表示される
+    サイドバーの確認
+      自分の名前と紹介文が表示される
+      自分のユーザ編集画面へのリンクが存在する
+      「New book」と表示される
+      titleフォームが表示される
+      titleフォームに値が入っていない
+      bodyフォームが表示される
+      bodyフォームに値が入っていない
+      Create Bookボタンが表示される
+    投稿成功のテスト
+成功！book create.
+新しい@book_commentのデータ... #<BookComment:0x00007fe2fc440368>, user: 1, book: 3 にて  
+      自分の新しい投稿が正しく保存される
+成功！book create.
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f68463a0>, user: 1, book: 3 にて  
+      リダイレクト先が、保存できた投稿の詳細画面になっている
+  自分の投稿詳細画面のテスト
+    表示内容の確認
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f667d9b0>, user: 1, book: 1 にて  
+      URLが正しい
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f64a9c88>, user: 1, book: 1 にて  
+      「Book detail」と表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2fc42fef0>, user: 1, book: 1 にて  
+      ユーザ画像・名前のリンク先が正しい
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f68e18c8>, user: 1, book: 1 にて  
+      投稿のtitleが表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f66d9850>, user: 1, book: 1 にて  
+      投稿のbodyが表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f64f4260>, user: 1, book: 1 にて  
+      投稿の編集リンクが表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2fc662948>, user: 1, book: 1 にて  
+      投稿の削除リンクが表示される
+    サイドバーの確認
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6918bc0>, user: 1, book: 1 にて  
+      自分の名前と紹介文が表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f66da868>, user: 1, book: 1 にて  
+      自分のユーザ編集画面へのリンクが存在する
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6529190>, user: 1, book: 1 にて  
+      「New book」と表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2fc42ca48>, user: 1, book: 1 にて  
+      titleフォームが表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6901268>, user: 1, book: 1 にて  
+      titleフォームに値が入っていない
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f670d8a8>, user: 1, book: 1 にて  
+      bodyフォームが表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6535418>, user: 1, book: 1 にて  
+      bodyフォームに値が入っていない
+新しい@book_commentのデータ... #<BookComment:0x00007fe2fca8a840>, user: 1, book: 1 にて  
+      Create Bookボタンが表示される
+    投稿成功のテスト
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6917860>, user: 1, book: 1 にて  
+成功！book create.
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f68495c8>, user: 1, book: 3 にて  
+      自分の新しい投稿が正しく保存される
+    編集リンクのテスト
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6690588>, user: 1, book: 1 にて  
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f662bf98>, user: 1, book: 3 にて  
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+      編集画面に遷移する
+    削除リンクのテスト
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f63982e0>, user: 1, book: 1 にて  
+@book 破壊！ destroyed!
+      application.html.erbにjavascript_pack_tagを含んでいる
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6966fa0>, user: 1, book: 1 にて  
+@book 破壊！ destroyed!
+      正しく削除される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f66de378>, user: 1, book: 1 にて  
+@book 破壊！ destroyed!
+      リダイレクト先が、投稿一覧画面になっている
+  自分の投稿編集画面のテスト
+    表示の確認
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+      URLが正しい
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+      「Editing Book」と表示される
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+      title編集フォームが表示される
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+      body編集フォームが表示される
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+      Update Bookボタンが表示される
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+      Showリンクが表示される
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+      Backリンクが表示される
+    編集成功のテスト
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+成功！book update.
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f66837c0>, user: 1, book: 1 にて  
+      titleが正しく更新される
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+成功！book update.
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f63ee4b0>, user: 1, book: 1 にて  
+      bodyが正しく更新される
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+成功！book update.
+新しい@book_commentのデータ... #<BookComment:0x00007fe2fc0ab4c8>, user: 1, book: 1 にて  
+      リダイレクト先が、更新した投稿の詳細画面になっている
+  ユーザ一覧画面のテスト
+    表示内容の確認
+      URLが正しい
+      自分と他人の画像が表示される: fallbackの画像がサイドバーの1つ＋一覧(2人)の2つの計3つ存在する
+      自分と他人の名前がそれぞれ表示される
+      自分と他人のshowリンクがそれぞれ表示される
+    サイドバーの確認
+      自分の名前と紹介文が表示される
+      自分のユーザ編集画面へのリンクが存在する
+      「New book」と表示される
+      titleフォームが表示される
+      titleフォームに値が入っていない
+      bodyフォームが表示される
+      bodyフォームに値が入っていない
+      Create Bookボタンが表示される
+  自分のユーザ詳細画面のテスト
+    表示の確認
+      URLが正しい
+      投稿一覧のユーザ画像のリンク先が正しい
+      投稿一覧に自分の投稿のtitleが表示され、リンクが正しい
+      投稿一覧に自分の投稿のbodyが表示される
+      他人の投稿は表示されない
+    サイドバーの確認
+      自分の名前と紹介文が表示される
+      自分のユーザ編集画面へのリンクが存在する
+      「New book」と表示される
+      titleフォームが表示される
+      titleフォームに値が入っていない
+      bodyフォームが表示される
+      bodyフォームに値が入っていない
+      Create Bookボタンが表示される
+  自分のユーザ情報編集画面のテスト
+    表示の確認
+      URLが正しい
+      名前編集フォームに自分の名前が表示される
+      画像編集フォームが表示される
+      自己紹介編集フォームに自分の自己紹介文が表示される
+      Update Userボタンが表示される
+    更新成功のテスト
+成功！userプロフィール update.
+      nameが正しく更新される
+成功！userプロフィール update.
+      introductionが正しく更新される
+成功！userプロフィール update.
+      リダイレクト先が、自分のユーザ詳細画面になっている
+
+[STEP3] 仕上げのテスト
+  サクセスメッセージのテスト
+    ユーザ新規登録成功時
+    ユーザログイン成功時
+    ユーザログアウト成功時
+成功！userプロフィール update.
+    ユーザのプロフィール情報更新成功時
+成功！book create.
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6825768>, user: 1, book: 3 にて  
+    投稿データの新規投稿成功時: 投稿一覧画面から行います。
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+成功！book update.
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f65db6b0>, user: 1, book: 1 にて  
+    投稿データの更新成功時
+  処理失敗時のテスト
+    ユーザ新規登録失敗: nameを1文字にする
+      新規登録されない
+      新規登録画面を表示しており、フォームの内容が正しい
+      バリデーションエラーが表示される
+    ユーザのプロフィール情報編集失敗: nameを1文字にする
+失敗...... 。userプロフィール updateできず.
+      更新されない
+失敗...... 。userプロフィール updateできず.
+      ユーザ編集画面を表示しており、フォームの内容が正しい
+失敗...... 。userプロフィール updateできず.
+      バリデーションエラーが表示される
+    投稿データの新規投稿失敗: 投稿一覧画面から行い、titleを空にする
+失敗...... 。book createできず.
+      投稿が保存されない
+失敗...... 。book createできず.
+      投稿一覧画面を表示している
+      新規投稿フォームの内容が正しい
+失敗...... 。book createできず.
+      バリデーションエラーが表示される
+    投稿データの更新失敗: titleを空にする
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+失敗...... 。book updateできず.
+      投稿が更新されない
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+失敗...... 。book updateできず.
+      投稿編集画面を表示しており、フォームの内容が正しい
+編集可:あなたのuser id と 作成者のuser id が 一致しました
+失敗...... 。book updateできず.
+      エラーメッセージが表示される
+  ログインしていない場合のアクセス制限のテスト: アクセスできず、ログイン画面に遷移する
+    ユーザ一覧画面
+    ユーザ詳細画面
+    ユーザ情報編集画面
+    投稿一覧画面
+    投稿詳細画面
+    投稿編集画面
+  他人の画面のテスト
+    他人の投稿詳細画面のテスト
+      表示内容の確認
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f698c930>, user: 1, book: 2 にて  
+        URLが正しい
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6790528>, user: 1, book: 2 にて  
+        「Book detail」と表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f659ab60>, user: 1, book: 2 にて  
+        ユーザ画像・名前のリンク先が正しい
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f638de08>, user: 1, book: 2 にて  
+        投稿のtitleが表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f69f7d20>, user: 1, book: 2 にて  
+        投稿のopinionが表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f67d9b60>, user: 1, book: 2 にて  
+        投稿の編集リンクが表示されない
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f66016f8>, user: 1, book: 2 にて  
+        投稿の削除リンクが表示されない
+      サイドバーの確認
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f63bfac0>, user: 1, book: 2 にて  
+        他人の名前と紹介文が表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2fc051518>, user: 1, book: 2 にて  
+        他人のユーザ編集画面へのリンクが存在する
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6828cd8>, user: 1, book: 2 にて  
+        自分の名前と紹介文は表示されない
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f65f3e18>, user: 1, book: 2 にて  
+        自分のユーザ編集画面へのリンクは存在しない
+    他人の投稿編集画面
+編集不可:あなたのuser id と 作成者のuser id は 一致しませんでした！
+      遷移できず、投稿一覧画面にリダイレクトされる
+    他人のユーザ詳細画面のテスト
+      表示の確認
+        URLが正しい
+        投稿一覧のユーザ画像のリンク先が正しい
+        投稿一覧に他人の投稿のtitleが表示され、リンクが正しい
+        投稿一覧に他人の投稿のopinionが表示される
+        自分の投稿は表示されない
+      サイドバーの確認
+        他人の名前と紹介文が表示される
+        他人のユーザ編集画面へのリンクが存在する
+        自分の名前と紹介文は表示されない
+        自分のユーザ編集画面へのリンクは存在しない
+    他人のユーザ情報編集画面
+      遷移できず、自分のユーザ詳細画面にリダイレクトされる
+  グリッドシステムのテスト: container, row, col-md-〇を正しく使えている
+    ユーザ一覧画面
+    ユーザ詳細画面
+    投稿一覧画面
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f66983f0>, user: 1, book: 1 にて  
+    投稿詳細画面
+  アイコンのテスト
+    トップ画面
+      本のアイコンが表示される
+    アバウト画面
+      本のアイコンが表示される
+    ヘッダー: ログインしていない場合
+      Homeリンクのアイコンが表示される
+      Aboutリンクのアイコンが表示される
+      Sign upリンクのアイコンが表示される
+      Log inリンクのアイコンが表示される
+    ヘッダー: ログインしている場合
+      Homeリンクのアイコンが表示される
+      Usersリンクのアイコンが表示される
+      Booksリンクのアイコンが表示される
+      Log outリンクのアイコンが表示される
+    サイドバー
+      ユーザ一覧画面でレンチアイコンが表示される
+      ユーザ詳細画面でレンチアイコンが表示される
+      投稿一覧画面でレンチアイコンが表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6428188>, user: 1, book: 1 にて  
+      投稿詳細画面でレンチアイコンが表示される
+
+[STEP4] いいねとコメントのテスト
+  投稿一覧画面のテスト[課題4追加分]
+    表示の確認
+      いいねボタンのハートアイコンが表示される
+      いいねボタンが表示される
+      コメント数が表示される
+    いいね作成機能のテスト
+新しいfavoriteのデータ... #<Favorite:0x00007fe2f63668d0>, id:, user: 2, book: 1 です  
+いいね成功しました
+      自分のいいねが正しく保存される
+新しいfavoriteのデータ... #<Favorite:0x00007fe2f6919958>, id:, user: 2, book: 1 です  
+いいね成功しました
+      リダイレクト先が投稿一覧画面になっている
+新しいfavoriteのデータ... #<Favorite:0x00007fe2f665f348>, id:, user: 2, book: 1 です  
+いいね成功しました
+      リダイレクト先でいいね数が正しく更新されている
+    いいね削除機能のテスト
+消したいfavoriteのデータ... #<Favorite:0x00007fe2f6341968> です 
+いいねの破壊に成功しました
+      自分のいいねが正しく削除される
+消したいfavoriteのデータ... #<Favorite:0x00007fe2f6918738> です 
+いいねの破壊に成功しました
+      リダイレクト先が投稿一覧画面になっている
+消したいfavoriteのデータ... #<Favorite:0x00007fe2f6643cb0> です 
+いいねの破壊に成功しました
+      リダイレクト先でいいね数が正しく更新されている
+  自分の投稿詳細画面のテスト[課題4追加分]
+    表示の確認
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f639c728>, user: 2, book: 1 にて  
+      いいねボタンのハートアイコンが表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f69ea120>, user: 2, book: 1 にて  
+      いいねボタンが表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f678d738>, user: 2, book: 1 にて  
+      コメント数が表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f653ed38>, user: 2, book: 1 にて  
+      コメント一覧でコメント投稿者の画像が表示される: fallbackの画像がサイドバーの1つ＋Book detail直下の1つ＋コメント一覧(2人)の2つの計4つ存在する
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f62946f0>, user: 2, book: 1 にて  
+      コメント一覧でコメント投稿者の名前が表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f688a398>, user: 2, book: 1 にて  
+      コメント一覧でコメントの内容が表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f65f5448>, user: 2, book: 1 にて  
+      自分が投稿したコメントの削除ボタンが表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f637a9c0>, user: 2, book: 1 にて  
+      他人が投稿したコメントの削除ボタンは表示されない
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f69625e0>, user: 2, book: 1 にて  
+      コメント投稿フォームが表示される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f66c67a0>, user: 2, book: 1 にて  
+      送信ボタンが表示される
+    いいね機能のテスト
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f63e4ff0>, user: 2, book: 1 にて  
+新しいfavoriteのデータ... #<Favorite:0x00007fe2f631bec0>, id:, user: 2, book: 1 です  
+いいね成功しました
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f63070d8>, user: 2, book: 1 にて  
+      自分のいいねが正しく保存される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2fc04e8e0>, user: 2, book: 1 にて  
+新しいfavoriteのデータ... #<Favorite:0x00007fe2f69cc7b0>, id:, user: 2, book: 1 です  
+いいね成功しました
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f698c200>, user: 2, book: 1 にて  
+      リダイレクト先が、いいねをした投稿詳細画面になっている
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f673cb08>, user: 2, book: 1 にて  
+新しいfavoriteのデータ... #<Favorite:0x00007fe2f66bfea0>, id:, user: 2, book: 1 です  
+いいね成功しました
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f66b0f68>, user: 2, book: 1 にて  
+      リダイレクト先でいいね数が正しく更新されている
+    コメント追加機能のテスト
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6428e80>, user: 2, book: 1 にて  
+新しいbook_commentのデータ... #<BookComment:0x00007fe2f63871e8>, user: 2, book: 1 です  
+コメント成功しました
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f634b328>, user: 2, book: 1 にて  
+      自分のコメントが正しく保存される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2fc0184e8>, user: 2, book: 1 にて  
+新しいbook_commentのデータ... #<BookComment:0x00007fe2f6960f10>, user: 2, book: 1 です  
+コメント成功しました
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f691dd50>, user: 2, book: 1 にて  
+      リダイレクト先が、コメントをした投稿詳細画面になっている
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f66de670>, user: 2, book: 1 にて  
+新しいbook_commentのデータ... #<BookComment:0x00007fe2f664fec0>, user: 2, book: 1 です  
+コメント成功しました
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6638c98>, user: 2, book: 1 にて  
+      リダイレクト先でコメント数が正しく更新されている
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f637d468>, user: 2, book: 1 にて  
+新しいbook_commentのデータ... #<BookComment:0x00007fe2f62f8fb0>, user: 2, book: 1 です  
+コメント成功しました
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f62b0d00>, user: 2, book: 1 にて  
+      リダイレクト先で新しいコメントが表示されている
+    コメント削除機能のテスト
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f68f5440>, user: 2, book: 1 にて  
+あああああああああああああああ
+消したいbook_commentのデータ... #<BookComment:0x00007fe2f68535a0> です 
+あなたは確かにコメント主です、削除を許可します
+コメントの破壊に成功しました
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f683ffa0>, user: 2, book: 1 にて  
+      自分のコメントが正しく削除される
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6621980>, user: 2, book: 1 にて  
+あああああああああああああああ
+消したいbook_commentのデータ... #<BookComment:0x00007fe2f65c9910> です 
+あなたは確かにコメント主です、削除を許可します
+コメントの破壊に成功しました
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6580170>, user: 2, book: 1 にて  
+      リダイレクト先が、コメントをしていた投稿詳細画面になっている
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6338318>, user: 2, book: 1 にて  
+あああああああああああああああ
+消したいbook_commentのデータ... #<BookComment:0x00007fe2f62989a8> です 
+あなたは確かにコメント主です、削除を許可します
+コメントの破壊に成功しました
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f628fbf0>, user: 2, book: 1 にて  
+      リダイレクト先でコメント数が正しく更新されている
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f68f5a58>, user: 2, book: 1 にて  
+あああああああああああああああ
+消したいbook_commentのデータ... #<BookComment:0x00007fe2f6847868> です 
+あなたは確かにコメント主です、削除を許可します
+コメントの破壊に成功しました
+新しい@book_commentのデータ... #<BookComment:0x00007fe2f6832ff8>, user: 2, book: 1 にて  
+      リダイレクト先で削除したコメントは表示されない
+  自分のユーザ詳細画面のテスト[課題4追加分]
+    表示の確認
+      いいねボタンのハートアイコンが表示される
+      いいねボタンが表示される
+      コメント数が表示される
+    いいね作成機能のテスト
+新しいfavoriteのデータ... #<Favorite:0x00007fe2f6745370>, id:, user: 2, book: 1 です  
+いいね成功しました
+      自分のいいねが正しく保存される
+新しいfavoriteのデータ... #<Favorite:0x00007fe2f6493230>, id:, user: 2, book: 1 です  
+いいね成功しました
+      リダイレクト先が自分のユーザ詳細画面になっている
+新しいfavoriteのデータ... #<Favorite:0x00007fe2fc09cae0>, id:, user: 2, book: 1 です  
+いいね成功しました
+      リダイレクト先でいいね数が正しく更新されている
+
+Finished in 32.37 seconds (files took 2.19 seconds to load)
+243 examples, 0 failures
+
