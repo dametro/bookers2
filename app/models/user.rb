@@ -30,6 +30,9 @@ class User < ApplicationRecord
   #   Book.where(user_id: self.id)
   # end
    
+  has_many :favorites, dependent: :destroy
+  
+   
   validates :name, presence: true, uniqueness: true, length: { in: 2..20 } 
   #nameは必須 かつ固有
 
