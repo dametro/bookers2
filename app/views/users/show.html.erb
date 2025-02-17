@@ -29,6 +29,22 @@
             </td>
             <td><%= link_to book.title, book_path(book), method: :get %></td>
             <td><%= book.body %></td>
+
+            <td>
+
+              <% if book.favorited_by?(current_user) %>
+                <%= link_to book_favorite_path(book), method: :delete do %>
+                  (ハートアイコン): <%= book.favorites.count %> あなたはいいね済 取り消す？
+                <% end %>
+              <% else %>
+                <%= link_to book_favorite_path(book), method: :post do %>
+                  (ハートアイコン): <%= book.favorites.count %> あなたは未いいね 加える？
+                <% end %>
+              <% end %>
+
+            </td>
+
+            <td><%# コメント数!!!!11 %></td>
           </tr>
         <% end %>
       </tbody>
